@@ -57,12 +57,6 @@ class __ProductListState extends State<_ProductList> {
     return Scaffold(
       body: Column(
         children: [
-          TextField(
-            controller: _textController1,
-          ),
-          TextField(
-            controller: _textController2,
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: productData.length,
@@ -99,8 +93,7 @@ class __ProductListState extends State<_ProductList> {
                     icon: Icon(Icons.delete),
                     onPressed: () {
                       setState(() {
-                        productData.remove(index);
-                        productData.length--;
+                        productData.removeAt(index);
                       });
                     },
                   ),
@@ -111,11 +104,55 @@ class __ProductListState extends State<_ProductList> {
           FloatingActionButton(
               child: Icon(Icons.add),
               onPressed: () {
-                setState(() {
-                  int qtyInput = int.parse(_textController2.text);
-                  productData.add(
-                      _Product(name: _textController1.text, qty: qtyInput));
-                });
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        scrollable: true,
+                        content: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Form(
+                            child: Column(
+                              children: <Widget>[
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: "Nama Item",
+                                    icon: Icon(Icons.add),
+                                  ),
+                                  controller: _textController1,
+                                ),
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: "Quantity",
+                                    icon: Icon(Icons.add_box_outlined),
+                                  ),
+                                  controller: _textController2,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                int qtyInput = int.parse(_textController2.text);
+                                productData.add(_Product(
+                                    name: _textController1.text,
+                                    qty: qtyInput));
+                              });
+                            },
+                            child: Text("Tambah"),
+                          )
+                        ],
+                      );
+                    });
+
+                // setState(() {
+                //   int qtyInput = int.parse(_textController2.text);
+                //   productData.add(
+                //       _Product(name: _textController1.text, qty: qtyInput));
+                // });
               })
         ],
       ),
