@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:test_app/shop_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,11 +35,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  void _changeSelected(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +94,20 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.contact_mail),
               title: Text("Contact"),
               onTap: () {},
-            )
+            ),
+            ListTile(
+              leading: Icon(Icons.assignment),
+              title: Text("Assigment 3"),
+              onTap: () {
+                Route route = MaterialPageRoute(builder: (context) => ShopList());
+                Navigator.push(context, route);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.assignment),
+              title: Text("Assigment 4"),
+              onTap: () {},
+            ),
           ],
         ),
       ),
@@ -107,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'Hello World',
+              'Welcome',
               style: TextStyle(fontSize: 20),
             ),
           ],
@@ -119,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.orange[0],
         visible: true,
         curve: Curves.bounceInOut,
-        tooltip: "my",
+        tooltip: "My Assignment",
         children: [
           SpeedDialChild(
             child: Icon(Icons.chrome_reader_mode, color: Colors.white),
@@ -140,36 +149,34 @@ class _MyHomePageState extends State<MyHomePage> {
             labelBackgroundColor: Colors.black,
           ),
           SpeedDialChild(
-            child: Icon(Icons.laptop_chromebook, color: Colors.white),
+            child: Icon(Icons.assignment, color: Colors.white),
             backgroundColor: Colors.orange,
-            onTap: () => print('Pressed Code'),
-            label: 'Code',
+            onTap: () {
+              Route route = MaterialPageRoute(builder: (context) => ShopList());
+              Navigator.push(context, route);
+            },
+            label: 'Assignment 3',
             labelStyle:
                 TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
             labelBackgroundColor: Colors.black,
           ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Tambah Angka',
-      //   child: const Icon(Icons.add),
-      // ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.arrow_back),
-            label: "Back",
-            tooltip: "",
-          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Home",
             tooltip: "",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_rounded),
-            label: "Recent App",
+            icon: Icon(Icons.assignment),
+            label: "Assignment 3",
+            tooltip: "",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assignment),
+            label: "Assignment 4",
             tooltip: "",
           ),
         ],
@@ -178,7 +185,12 @@ class _MyHomePageState extends State<MyHomePage> {
         unselectedItemColor: Colors.grey,
         showSelectedLabels: true,
         showUnselectedLabels: true,
-        onTap: _changeSelected,
+        onTap: (value) {
+          if (value == 1) {
+            Route route = MaterialPageRoute(builder: (context) => ShopList());
+            Navigator.push(context, route);
+          }
+        },
       ),
     );
   }
