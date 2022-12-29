@@ -99,7 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.assignment),
               title: Text("Assigment 3"),
               onTap: () {
-                Route route = MaterialPageRoute(builder: (context) => ShopList());
+                Route route =
+                    MaterialPageRoute(builder: (context) => ShopList());
                 Navigator.push(context, route);
               },
             ),
