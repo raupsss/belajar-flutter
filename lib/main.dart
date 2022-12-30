@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:test_app/basic_layout.dart';
 import 'package:test_app/shop_list.dart';
 
 void main() {
@@ -34,8 +35,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,7 +106,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
               leading: Icon(Icons.assignment),
               title: Text("Assigment 4"),
-              onTap: () {},
+              onTap: () {
+                Route route =
+                    MaterialPageRoute(builder: (context) => BasicLayout());
+                Navigator.push(context, route);
+              },
             ),
           ],
         ),
@@ -132,26 +135,21 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: "My Assignment",
         children: [
           SpeedDialChild(
-            child: Icon(Icons.chrome_reader_mode, color: Colors.white),
+            child: Icon(Icons.layers_outlined, color: Colors.white),
             backgroundColor: Colors.orange,
-            onTap: () => print('Pressed Read Later'),
-            label: 'Read',
+            onTap: () {
+              Route route =
+                  MaterialPageRoute(builder: (context) => BasicLayout());
+              Navigator.push(context, route);
+            },
+            label: 'Assignment 4',
             labelStyle:
                 TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
             labelBackgroundColor: Colors.black,
           ),
           SpeedDialChild(
-            child: Icon(Icons.create, color: Colors.white),
-            backgroundColor: Colors.orange,
-            onTap: () => print('Pressed Write'),
-            label: 'Write',
-            labelStyle:
-                TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
-            labelBackgroundColor: Colors.black,
-          ),
-          SpeedDialChild(
-            child: Icon(Icons.assignment, color: Colors.white),
-            backgroundColor: Colors.orange,
+            child: Icon(Icons.shopify_rounded, color: Colors.white),
+            backgroundColor: Colors.orange, 
             onTap: () {
               Route route = MaterialPageRoute(builder: (context) => ShopList());
               Navigator.push(context, route);
@@ -173,15 +171,14 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment),
             label: "Assignment 3",
-            tooltip: "",
+            tooltip: "Shop List App",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment),
             label: "Assignment 4",
-            tooltip: "",
+            tooltip: "Basic Layout",
           ),
         ],
-        currentIndex: _selectedIndex,
         selectedItemColor: Colors.red,
         unselectedItemColor: Colors.grey,
         showSelectedLabels: true,
@@ -189,6 +186,10 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: (value) {
           if (value == 1) {
             Route route = MaterialPageRoute(builder: (context) => ShopList());
+            Navigator.push(context, route);
+          } else if (value == 2) {
+            Route route =
+                MaterialPageRoute(builder: (context) => BasicLayout());
             Navigator.push(context, route);
           }
         },

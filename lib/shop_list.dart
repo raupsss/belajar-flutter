@@ -36,6 +36,13 @@ class ShopList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Shop List"),
+        actions: [
+          IconButton(
+            onPressed: (() {}),
+            icon: Icon(Icons.assignment),
+            tooltip: "Assignment 3",
+          )
+        ],
       ),
       body: _ProductList(),
     );
@@ -51,8 +58,28 @@ class _ProductList extends StatefulWidget {
 
 class __ProductListState extends State<_ProductList> {
   @override
-  final TextEditingController _textController1 = TextEditingController();
+  final TextEditingController textController1 = TextEditingController();
   final TextEditingController _textController2 = TextEditingController();
+
+  showAlertDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Selamat"),
+            content: Text("${textController1.text} berhasil ditambahkan"),
+            actions: [
+              TextButton(
+                child: Text("Oke"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          );
+        });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -119,7 +146,7 @@ class __ProductListState extends State<_ProductList> {
                                     labelText: "Nama Item",
                                     icon: Icon(Icons.add),
                                   ),
-                                  controller: _textController1,
+                                  controller: textController1,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(
@@ -138,21 +165,18 @@ class __ProductListState extends State<_ProductList> {
                               setState(() {
                                 int qtyInput = int.parse(_textController2.text);
                                 productData.add(_Product(
-                                    name: _textController1.text,
-                                    qty: qtyInput));
+                                  name: textController1.text,
+                                  qty: qtyInput,
+                                ));
                               });
+                              Navigator.pop(context);
+                              showAlertDialog();
                             },
                             child: Text("Tambah"),
-                          )
+                          ),
                         ],
                       );
                     });
-
-                // setState(() {
-                //   int qtyInput = int.parse(_textController2.text);
-                //   productData.add(
-                //       _Product(name: _textController1.text, qty: qtyInput));
-                // });
               })
         ],
       ),
